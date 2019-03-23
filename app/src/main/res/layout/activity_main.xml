@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".ShelterLogin">
 
     <TextView
         android:id="@+id/textView"
@@ -122,7 +122,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:ems="10"
-        android:inputType="textEmailAddress"
+        android:inputType="textPersonName"
         android:text="@string/promtEmail"
         android:textColor="@android:color/tertiary_text_light"
         app:layout_constraintEnd_toEndOf="parent"
