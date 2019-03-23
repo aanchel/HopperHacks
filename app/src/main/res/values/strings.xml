@@ -100,4 +100,7 @@
     <string name="action_settings">Settings</string>
     <string name="shelterSend">Send</string>
     <string name="shelterList">View Shelter List</string>
+    <string name="shelterLogin">I am a shelter</string>
+    <string name="vicLogin">I need help</string>
+    <string name="donerLogin">I want to help</string>
 </resources>
