@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">HopperHacks</string>
     <string name="strTest">skrt skrt</string>
+    <string name="promtEmail">Enter your email address</string>
 </resources>
