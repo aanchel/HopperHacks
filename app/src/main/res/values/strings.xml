@@ -2,4 +2,8 @@
     <string name="app_name">HopperHacks</string>
     <string name="promtEmail">Enter your email address</string>
     <string name="strTest">Fill out the following form for shelters</string>
+    <string name="shelterName">Enter the name of your shelter</string>
+    <string name="shelterLoc">Enter the City and State of your shelter</string>
+    <string name="shelterNeed">Enter resources your shelter needs</string>
+    <string name="shelterType" />
 </resources>
