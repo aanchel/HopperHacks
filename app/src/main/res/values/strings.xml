@@ -5,5 +5,6 @@
     <string name="shelterName">Enter the name of your shelter</string>
     <string name="shelterLoc">Enter the City and State of your shelter</string>
     <string name="shelterNeed">Enter resources your shelter needs</string>
-    <string name="shelterType" />
+    <string name="shelterType">Follow the instructions above</string>
+    <string name="shelterDist">Enter the distance away from you in mile</string>
 </resources>
