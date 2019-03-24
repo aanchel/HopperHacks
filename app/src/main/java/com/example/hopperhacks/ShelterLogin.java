@@ -25,7 +25,8 @@ public class ShelterLogin extends AppCompatActivity {
     private EditText shelterLoc;
     private Button shelterSend;
     private Button viewShelterList;
-
+    private Button home;
+    private static boolean sorted = false;
 
     public static ArrayList<Shelter> unsorted = new ArrayList<Shelter>();
     public static ArrayList<Shelter> homeless = new ArrayList<Shelter>();
@@ -37,8 +38,7 @@ public class ShelterLogin extends AppCompatActivity {
     public static ArrayList<Shelter> blankets = new ArrayList<Shelter>();
     public static ArrayList<Shelter> water = new ArrayList<Shelter>();
     public static ArrayList<Shelter> clothes = new ArrayList<Shelter>();
-
-    public static void printList() {
+    public static void addList() {
         Shelter a = new Shelter(5, "Cupertino, California", "homeless", "food", "Bil Wilson Center");
         unsorted.add(a);
         Shelter b = new Shelter(10, "Sunnyvale, California", "homeless", "toiletries", "Sunnyvale County Winter Shelter");
@@ -79,9 +79,21 @@ public class ShelterLogin extends AppCompatActivity {
         unsorted.add(s);
         Shelter t = new Shelter(25, "San Francisco, California", "earthquake", "blankets", "Emergency Shelter");
         unsorted.add(t);
-
         sortIntoTypes(unsorted);
-        //sortIntoNeeds(unsorted);
+        sortIntoNeedTypes(unsorted);
+        insertionSort(homeless);
+        insertionSort(hurricane);
+        insertionSort(pet);
+        insertionSort(earthquake);
+        insertionSort(food);
+        insertionSort(toiletries);
+        insertionSort(blankets);
+        insertionSort(water);
+        insertionSort(clothes);
+        sorted = true;
+
+    }
+    public static void printList() {
         insertionSort(homeless);
         insertionSort(hurricane);
         insertionSort(pet);
@@ -109,7 +121,54 @@ public class ShelterLogin extends AppCompatActivity {
         }
 
     }
+    public static void printNeedList() {
 
+        insertionSort(homeless);
+        insertionSort(hurricane);
+        insertionSort(pet);
+        insertionSort(earthquake);
+        insertionSort(food);
+        insertionSort(toiletries);
+        insertionSort(blankets);
+        insertionSort(water);
+        insertionSort(clothes);
+        System.out.println("Shelters that need food near you: \n");
+        for (int i = 0; i < food.size(); i++) {
+            System.out.print("\t" + food.get(i).toString());
+        }
+        System.out.println("Shelters that need toiletries near you: \n");
+        for (int i = 0; i < toiletries.size(); i++) {
+            System.out.print("\t" + toiletries.get(i).toString());
+        }
+        System.out.println("Shelters that need blankets near you: \n");
+        for (int i = 0; i < blankets.size(); i++) {
+            System.out.print("\t" + blankets.get(i).toString());
+        }
+        System.out.println("Shelters that need water near you: \n");
+        for (int i = 0; i < water.size(); i++) {
+            System.out.print("\t" + water.get(i).toString());
+        }
+
+    }
+    public static void sortIntoNeedTypes(ArrayList<Shelter> types) {
+        for (int i = 0; i < types.size(); i++) {
+            if (types.get(i).getNeeds().equals("food")) {
+                food.add(types.get(i));
+            }
+            if (types.get(i).getNeeds().equals("toiletries")) {
+                toiletries.add(types.get(i));
+            }
+            if (types.get(i).getNeeds().equals("blankets")) {
+                blankets.add(types.get(i));
+            }
+            if (types.get(i).getNeeds().equals("clothes")) {
+                clothes.add(types.get(i));
+            }
+            if (types.get(i).getNeeds().equals("water")) {
+                water.add(types.get(i));
+            }
+        }
+    }
     public static void sortIntoTypes(ArrayList<Shelter> types) {
         for (int i = 0; i < types.size(); i++) {
             if (types.get(i).getType().equals("homeless")) {
@@ -151,6 +210,9 @@ public class ShelterLogin extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        if (!sorted) {
+            ShelterLogin.addList();
+        }
         /*
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -173,9 +235,10 @@ public class ShelterLogin extends AppCompatActivity {
         shelterNeed = (EditText) findViewById(R.id.shelterNeed);
         shelterSend = (Button) findViewById(R.id.shelterSend);
         viewShelterList = (Button) findViewById(R.id.viewShelterList);
-
+        home = (Button)findViewById(R.id.home);
         shelterSendFunctionality();
         viewShelterListFunctionality();
+        homeSendFunctionality();
     }
     private void viewShelterListFunctionality() {
         viewShelterList.setOnClickListener(new View.OnClickListener() {
@@ -183,6 +246,15 @@ public class ShelterLogin extends AppCompatActivity {
             public void onClick(View v) {
                 finish();
                 startActivity(new Intent(ShelterLogin.this, ShelterList.class));
+            }
+        });
+    }
+    private void homeSendFunctionality() {
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+                startActivity(new Intent(ShelterLogin.this, MainLogin.class));
             }
         });
     }
@@ -198,6 +270,44 @@ public class ShelterLogin extends AppCompatActivity {
 
                 Shelter newShelter = new Shelter(dist, location, type, needs, name);
                 unsorted.add(newShelter);
+
+                    if (newShelter.getType().equals("homeless")) {
+                        homeless.add(newShelter);
+                        insertionSort(homeless);
+                    }
+                    if (newShelter.getType().equals("hurricane")) {
+                        hurricane.add(newShelter);
+                        insertionSort(hurricane);
+                    }
+                    if (newShelter.getType().equals("pet")) {
+                        pet.add(newShelter);
+                        insertionSort(pet);
+                    }
+                    if (newShelter.getType().equals("earthquake")) {
+                        earthquake.add(newShelter);
+                        insertionSort(earthquake);
+                    }
+
+                if (newShelter.getNeeds().equals("food")) {
+                    food.add(newShelter);
+                    insertionSort(food);
+                }
+                if (newShelter.getNeeds().equals("toiletries")) {
+                    toiletries.add(newShelter);
+                    insertionSort(toiletries);
+                }
+                if (newShelter.getNeeds().equals("blankets")) {
+                    blankets.add(newShelter);
+                    insertionSort(blankets);
+                }
+                if (newShelter.getNeeds().equals("clothes")) {
+                    clothes.add(newShelter);
+                    insertionSort(clothes);
+                }
+                if (newShelter.getNeeds().equals("water")) {
+                    water.add(newShelter);
+                    insertionSort(water);
+                }
 
 
             }

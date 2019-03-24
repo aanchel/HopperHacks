@@ -1,20 +1,23 @@
 package com.example.hopperhacks;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
-
+import android.widget.Button;
 import java.util.ArrayList;
 
 public class ShelterList extends AppCompatActivity {
     private TextView textViewList;
+    private Button home2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shelter_list);
         textViewList = (TextView) findViewById(R.id.textViewList);
-
-        ShelterLogin.printList();
+        home2 = (Button) findViewById(R.id.home2);
+        //ShelterLogin.printList();
 
         ArrayList<Shelter> unsorted = ShelterLogin.unsorted;
 
@@ -44,5 +47,16 @@ public class ShelterList extends AppCompatActivity {
         String print4 = "Earthquake Shelters near you: \n\r";
 
         textViewList.setText(print1 + temp + print2 + temp2 + print3 + temp3+ print4+ temp4);
+
+        home2Functionality();
+    }
+    private void home2Functionality() {
+        home2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+                startActivity(new Intent(ShelterList.this, MainLogin.class));
+            }
+        });
     }
 }
